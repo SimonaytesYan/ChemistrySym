@@ -4,15 +4,21 @@ SFML_FLAGS    = -lsfml-graphics -lsfml-window -lsfml-system
 
 EXE_FILE = Exe/run
 
-debug: vector_debug
-	g++ $(SFML_FLAGS) $(DEBUG_FLAGS) Src/main.cpp Obj/Vector.o -o $(EXE_FILE)
-release: vector_release
-	g++ $(SFML_FLAGS) $(RELEASE_FLAGS) Src/main.cpp Obj/Vector.o -o $(EXE_FILE)
+debug: vector_debug coord_sys_debug
+	g++ $(SFML_FLAGS) $(DEBUG_FLAGS) Src/main.cpp Obj/Vector.o Obj/CoordSystem.o -o $(EXE_FILE)
+release: vector_release coord_sys_release
+	g++ $(SFML_FLAGS) $(RELEASE_FLAGS) Src/main.cpp Obj/Vector.o Obj/CoordSystem.o -o $(EXE_FILE)
 
 vector_debug:
 	g++ -c $(DEBUG_FLAGS) Src/Vector/Vector.cpp -o Obj/Vector.o
 vector_release:
 	g++ -c $(RELEASE_FLAGS) Src/Vector/Vector.cpp -o Obj/Vector.o
+
+coord_sys_debug:
+	g++ -c $(DEBUG_FLAGS) Src/CoordSystem/CoordSystem.cpp -o Obj/CoordSystem.o
+
+coord_sys_release:
+	g++ -c $(RELEASE_FLAGS) Src/CoordSystem/CoordSystem.cpp -o Obj/CoordSystem.o
 
 run:
 	./$(EXE_FILE)
