@@ -14,7 +14,7 @@ class Vector
 
     sf::Color color;
 
-    public : 
+public : 
     Vector(double x, double y, sf::Color color = sf::Color::White);
     ~Vector();
 

@@ -2,7 +2,8 @@
 #define SYM_PARTICLE
 
 #include "../Vector/Vector.h"
-#include "../Widget/Flask/Flask.h"
+
+class Flask;
 
 enum ParticleTypes
 {
@@ -12,14 +13,14 @@ enum ParticleTypes
 
 class Particle
 {
-    protected :
+protected :
     
     ParticleTypes type;
     Vector        position;
     Vector        speed;
     double        r;
     
-    public :
+public :
 
     Particle(ParticleTypes _type, 
             Vector _position = Vector(0, 0), 
@@ -31,9 +32,9 @@ class Particle
     r (_r)
     {};
 
-    virtual void Draw(Flask &flask);
+    virtual void Draw(Flask *flask);
 
-    void ChangePosition(Flask &flask);
+    void ChangePosition(Flask *flask);
 };
 
 #endif //SYM_PARTICLE

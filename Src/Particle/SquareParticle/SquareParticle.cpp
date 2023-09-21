@@ -1,13 +1,15 @@
 #include "SquareParticle.h"
 
-void SquareParticle::Draw(Flask &flask)
+#include "../../Widget/Flask/Flask.h"
+
+void SquareParticle::Draw(Flask *flask)
 {
     sf::RectangleShape shape(sf::Vector2f(r, r));
 
     shape.setFillColor(sf::Color::Red);
     shape.setPosition(position.GetX(), position.GetY());
 
-    flask.DrawInside(shape);
+    flask->DrawInside(shape);
 
     ChangePosition(flask);
 }

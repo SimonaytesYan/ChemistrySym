@@ -13,17 +13,16 @@ class Widget
     sf::RenderTexture texture;
     Vector            position;
 
-    public : 
-    Widget(double x0, double y0, double weight, double height);
+public : 
+    Widget(double x0, double y0, double width, double height);
 
     double GetX();
     double GetY(); 
+    Vector GetSize();
 
     ~Widget();
 
-    virtual void Draw(Widget* window);
-    
-    Vector GetSize();
+    virtual void Draw(sf::RenderWindow* window);
     
     void DrawInside(const sf::Drawable     &drawable,
                     const sf::RenderStates &states = sf::RenderStates::Default)

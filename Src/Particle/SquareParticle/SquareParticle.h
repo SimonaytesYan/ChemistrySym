@@ -12,7 +12,7 @@ class SquareParticle : public Particle
     Particle(SQUARE, _position, _speed, r)
     {};
 
-    void Draw(Flask &flask);
+    void Draw(Flask* flask) override;
 };
 
 #endif //SYM_SQUARE_PARTICLE

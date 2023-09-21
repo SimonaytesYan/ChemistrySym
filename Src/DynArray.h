@@ -8,7 +8,7 @@ class DynArray
     int capacity;
     T*  array;
 
-    public :
+public :
     DynArray(size_t _length)
     {
         length   = 0;

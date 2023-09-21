@@ -12,7 +12,7 @@ class CoordSystem
     double unit_x;
     double unit_y;
 
-    public : 
+public : 
     CoordSystem(double X0 = 0, double Y0 = 0, 
                 double unit_X = 1, double unit_Y = 1);
     ~CoordSystem();

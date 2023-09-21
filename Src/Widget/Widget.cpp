@@ -1,7 +1,7 @@
 #include "Widget.h"
 #include "../Vector/Vector.h"
 
-void Widget::Draw(Widget* window)      //Clear Widget
+void Widget::Draw(sf::RenderWindow* window)      //Clear Widget
 {
 
     sf::RectangleShape frame(sf::Vector2f(this->texture.getSize().x - 2 * kThicknessWeight, 
@@ -20,7 +20,7 @@ void Widget::Draw(Widget* window)      //Clear Widget
     sf::Sprite sprite(this->texture.getTexture());
 	sprite.setPosition(GetX(), GetY());
     
-	window->DrawInside(sprite);
+	window->draw(sprite);
     
     this->texture.clear();
 }
@@ -32,10 +32,10 @@ bool Widget::Inside_p(double x, double y)
             GetY() < y && y < GetY() + texture.getSize().y);
 }
 
-Widget::Widget(double x0, double y0, double weight, double height) :
+Widget::Widget(double x0, double y0, double width, double height) :
 position (Vector(x0, y0))
 {
-    texture.create(weight, height); 
+    texture.create(width, height); 
 }
 
 double Widget::GetX() 
