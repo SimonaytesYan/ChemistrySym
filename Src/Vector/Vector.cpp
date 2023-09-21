@@ -73,7 +73,7 @@ Vector operator^(const Vector& a, double b)
     return vec;
 }
 
-static void DrawTriangleTip(SubWindow* window, CoordSystem* coord_sys, 
+static void DrawTriangleTip(Widget* window, CoordSystem* coord_sys, 
                             Vector* vec, double x0, double y0)
 {
     double x1 = vec->GetX() + x0;
@@ -104,7 +104,7 @@ static void DrawTriangleTip(SubWindow* window, CoordSystem* coord_sys,
     window->draw(tip);
 }
 
-static void DrawTriangleTipOptimized(SubWindow* window, CoordSystem* coord_sys, 
+static void DrawTriangleTipOptimized(Widget* window, CoordSystem* coord_sys, 
                                      Vector* vec, double x0, double y0)
 {
     double x1 = vec->GetX() + x0;
@@ -134,7 +134,7 @@ static void DrawTriangleTipOptimized(SubWindow* window, CoordSystem* coord_sys,
     window->draw(tip);
 }
 
-void Vector::Draw(SubWindow* window, CoordSystem* coord_sys,  
+void Vector::Draw(Widget* window, CoordSystem* coord_sys,  
                         double x0, double y0)
 {
     DrawTriangleTipOptimized(window, coord_sys, this, x0, y0);

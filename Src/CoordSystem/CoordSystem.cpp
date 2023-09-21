@@ -18,7 +18,7 @@ CoordSystem::~CoordSystem()
     unit_y = NAN;
 }
 
-void CoordSystem::CoordSystemDraw(SubWindow* window)
+void CoordSystem::CoordSystemDraw(Widget* window)
 {
     Vector OX((window->getSize().x - kThicknessWeight) / this->unit_x, 0);
     Vector OY(0, (window->getSize().y - kThicknessWeight) / this->unit_y);

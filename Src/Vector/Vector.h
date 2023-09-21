@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../SubWindow/SubWindow.h"
+#include "../Widget/Widget.h"
 #include "../CoordSystem/CoordSystem.h"
 
 class Vector
@@ -21,7 +21,7 @@ class Vector
     double    GetY()     {return y;};
     sf::Color GetColor() {return color;};
 
-    void Draw(SubWindow* texture, CoordSystem* coord_sys,  
+    void Draw(Widget* texture, CoordSystem* coord_sys,  
                     double x0, double y0);
     inline double Length() const;
     void Rotate(double deg);

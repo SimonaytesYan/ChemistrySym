@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../SubWindow/SubWindow.h"
+#include "../Widget/Widget.h"
 
 class CoordSystem
 {
@@ -32,7 +32,7 @@ class CoordSystem
     double CoordReverseRecalcY(double y)   //from y on the window makes y in coordination system
     {return -(y - y0) / unit_x;};
 
-    void CoordSystemDraw(SubWindow* window);
+    void CoordSystemDraw(Widget* window);
 };
 
 #endif  //SYM_COORD_SYSTEM
