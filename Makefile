@@ -4,10 +4,10 @@ SFML_FLAGS    = -lsfml-graphics -lsfml-window -lsfml-system
 
 EXE_FILE = Exe/run
 
-debug: vector_debug coord_sys_debug widget_debug
-	g++ $(SFML_FLAGS) $(DEBUG_FLAGS) Src/main.cpp Obj/Vector.o Obj/CoordSystem.o Obj/Widget.o -o $(EXE_FILE)
-release: vector_release coord_sys_release widget_release
-	g++ $(SFML_FLAGS) $(RELEASE_FLAGS) Src/main.cpp Obj/Vector.o Obj/CoordSystem.o Obj/Widget.o -o $(EXE_FILE)
+debug: vector_debug coord_sys_debug widget_debug particle_debug flask_debug
+	g++ $(SFML_FLAGS) $(DEBUG_FLAGS) Src/main.cpp Obj/Vector.o Obj/CoordSystem.o Obj/Widget.o Obj/Particle.o Obj/Flask.o -o $(EXE_FILE)
+release: vector_release coord_sys_release widget_release particle_release flask_release
+	g++ $(SFML_FLAGS) $(RELEASE_FLAGS) Src/main.cpp Obj/Vector.o Obj/CoordSystem.o Obj/Widget.o Obj/Particle.o Obj/Flask.o -o $(EXE_FILE)
 
 vector_debug:
 	g++ -c $(DEBUG_FLAGS) Src/Vector/Vector.cpp -o Obj/Vector.o
@@ -23,6 +23,16 @@ widget_debug:
 	g++ -c $(DEBUG_FLAGS) Src/Widget/Widget.cpp -o Obj/Widget.o
 widget_release:
 	g++ -c $(RELEASE_FLAGS) Src/Widget/Widget.cpp -o Obj/Widget.o
+
+particle_debug:
+	g++ -c $(DEBUG_FLAGS) Src/Particle/Particle.cpp -o Obj/Particle.o
+particle_release:
+	g++ -c $(RELEASE_FLAGS) Src/Particle/Particle.cpp -o Obj/Particle.o
+
+flask_debug:
+	g++ -c $(DEBUG_FLAGS) Src/Widget/Flask/Flask.cpp -o Obj/Flask.o
+flask_release:
+	g++ -c $(RELEASE_FLAGS) Src/Widget/Flask/Flask.cpp -o Obj/Flask.o
 
 run:
 	./$(EXE_FILE)
