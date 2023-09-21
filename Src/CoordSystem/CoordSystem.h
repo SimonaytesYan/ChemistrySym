@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../Widget/Widget.h"
+class Widget;
 
 class CoordSystem
 {

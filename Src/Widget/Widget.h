@@ -4,30 +4,37 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
+#include "../Vector/Vector.h"
+
 const int kThicknessWeight = 10;
 
-class Widget : public sf::RenderTexture
+class Widget
 {
-    double x0;
-    double y0;
+    sf::RenderTexture texture;
+    Vector            position;
 
     public : 
-    Widget(double X0, double Y0, double weight, double height) : 
-    x0 (X0),
-    y0 (Y0)
-    { this->create(weight, height); }
-    
-    double GetX0() {return x0;}
-    double GetY0() {return y0;} 
+    Widget(double x0, double y0, double weight, double height);
 
-    ~Widget()
-    {
-        x0 = NAN;
-        y0 = NAN;
-        this->~Widget();
-    }
+    double GetX();
+    double GetY(); 
+
+    ~Widget();
 
     virtual void Draw(Widget* window);
+    
+    Vector GetSize();
+    
+    void DrawInside(const sf::Drawable     &drawable,
+                    const sf::RenderStates &states = sf::RenderStates::Default)
+    { texture.draw(drawable, states); }
+
+    void DrawInside(const sf::Vertex       *vertices,
+                    std::size_t 	        vertexCount,
+                    sf::PrimitiveType 	    type,
+                    const sf::RenderStates &states = sf::RenderStates::Default )
+    { texture.draw(vertices, vertexCount, type, states); };
+
     bool Inside_p(double x, double y);
 };
 

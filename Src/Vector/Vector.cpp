@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Vector.h"
+#include "../Widget/Widget.h"
 
 Vector::Vector(double x, double y, sf::Color color) :
 x (x),
@@ -101,7 +102,7 @@ static void DrawTriangleTip(Widget* window, CoordSystem* coord_sys,
         tip[i] = sf::Vertex(sf::Vector2f(vertex_coords[i*2], vertex_coords[i*2 + 1]), vec->GetColor());
     }
 
-    window->draw(tip);
+    window->DrawInside(tip);
 }
 
 static void DrawTriangleTipOptimized(Widget* window, CoordSystem* coord_sys, 
@@ -131,7 +132,7 @@ static void DrawTriangleTipOptimized(Widget* window, CoordSystem* coord_sys,
         tip[i] = sf::Vertex(sf::Vector2f(vertex_coords[i*2], vertex_coords[i*2 + 1]), vec->GetColor());
     }
 
-    window->draw(tip);
+    window->DrawInside(tip);
 }
 
 void Vector::Draw(Widget* window, CoordSystem* coord_sys,  
@@ -151,7 +152,7 @@ void Vector::Draw(Widget* window, CoordSystem* coord_sys,
         sf::Vertex(sf::Vector2f(x1, y1), color)
     };
 
-    window->draw(line, 2, sf::Lines);
+    window->DrawInside(line, 2, sf::Lines);
 }
 
 inline double Vector::Length() const

@@ -3,7 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../Widget/Widget.h"
+class Widget;
+
 #include "../CoordSystem/CoordSystem.h"
 
 class Vector

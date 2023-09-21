@@ -1,10 +1,11 @@
 #include "Widget.h"
+#include "../Vector/Vector.h"
 
 void Widget::Draw(Widget* window)      //Clear Widget
 {
 
-    sf::RectangleShape frame(sf::Vector2f(this->getSize().x - 2 * kThicknessWeight, 
-                                          this->getSize().y - 2 * kThicknessWeight));
+    sf::RectangleShape frame(sf::Vector2f(this->texture.getSize().x - 2 * kThicknessWeight, 
+                                          this->texture.getSize().y - 2 * kThicknessWeight));
     frame.setPosition(kThicknessWeight, kThicknessWeight);
     
     frame.setFillColor(sf::Color::Transparent);
@@ -12,21 +13,47 @@ void Widget::Draw(Widget* window)      //Clear Widget
     frame.setOutlineThickness(kThicknessWeight);
     frame.setOutlineColor(sf::Color(255, 255, 255));
 
-    this->draw(frame);
+    this->texture.draw(frame);
 
-    this->display();
+    this->texture.display();
 
-    sf::Sprite sprite(this->getTexture());
-	sprite.setPosition(this->x0, this->y0);
+    sf::Sprite sprite(this->texture.getTexture());
+	sprite.setPosition(GetX(), GetY());
     
-	window->draw(sprite);
+	window->DrawInside(sprite);
     
-    this->clear();
+    this->texture.clear();
 }
 
 
 bool Widget::Inside_p(double x, double y)
 {
-    return (this->x0 < x && x < this->x0 + this->getSize().x &&
-            this->y0 < y && y < this->y0 + this->getSize().y);
+    return (GetX() < x && x < GetX() + texture.getSize().x &&
+            GetY() < y && y < GetY() + texture.getSize().y);
+}
+
+Widget::Widget(double x0, double y0, double weight, double height) :
+position (Vector(x0, y0))
+{
+    texture.create(weight, height); 
+}
+
+double Widget::GetX() 
+{
+    return position.GetX();
+}
+double Widget::GetY() 
+{
+    return position.GetY();
+} 
+
+Widget::~Widget()
+{
+    position.~Vector();
+    texture.~RenderTexture();
+}
+
+Vector Widget::GetSize()
+{
+    return Vector(texture.getSize().x, texture.getSize().y);
 }
