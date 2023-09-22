@@ -18,12 +18,8 @@ public :
 
     double GetLength() { return length; };
 
-    T operator[](int index)
-    {
-        if (index >= length)
-            length = index + 1;
-        return array[index];
-    };
+    T& operator[](int index)
+    { return array[index]; };
 
     void PushBack(T elem)
     {
@@ -35,6 +31,12 @@ public :
 
         array[length] = elem;
         length++;
+    };
+
+    void PopBack()
+    {
+        if (length > 0)
+            length--;
     };
 };
 
