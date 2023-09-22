@@ -18,7 +18,7 @@ Vector::~Vector()
 
 void Vector::Dump()
 {
-    printf("(%lf, %lf)\n", x, y);
+    fprintf(stderr, "(%lf, %lf)\n", x, y);
 }
 
 Vector operator+(const Vector& a, const Vector& b)
@@ -158,11 +158,6 @@ void Vector::Draw(Widget* window, CoordSystem* coord_sys,
     };
 
     window->DrawInside(line, 2, sf::Lines);
-}
-
-inline double Vector::Length() const
-{ 
-	return sqrt(x*x + y*y);
 }
 
 void Vector::Rotate(double deg)

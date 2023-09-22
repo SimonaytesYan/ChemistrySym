@@ -2,6 +2,7 @@
 #define SYM_GEOM_VECTOR
 
 #include <SFML/Graphics.hpp>
+#include <math.h>
 
 class Widget;
 
@@ -25,8 +26,8 @@ public :
     void Dump();
     void Draw(Widget* texture, CoordSystem* coord_sys,  
                     double x0, double y0);
-    inline double Length() const;
-    void Rotate(double deg);
+    double Length() const { return sqrt(x*x + y*y); };
+    void   Rotate(double deg);
 
     friend Vector operator+(const Vector& a, const Vector& b);
     friend Vector operator-(const Vector& a);
