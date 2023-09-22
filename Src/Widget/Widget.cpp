@@ -3,7 +3,6 @@
 
 void Widget::Draw(sf::RenderWindow* window)      //Clear Widget
 {
-
     sf::RectangleShape frame(sf::Vector2f(this->texture.getSize().x - 2 * kThicknessWeight, 
                                           this->texture.getSize().y - 2 * kThicknessWeight));
     frame.setPosition(kThicknessWeight, kThicknessWeight);

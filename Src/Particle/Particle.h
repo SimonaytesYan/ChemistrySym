@@ -32,7 +32,7 @@ public :
     r (_r)
     {};
 
-    virtual void Draw(Flask *flask);
+    virtual void Draw(Flask *flask) = 0;
 
     void ChangePosition(Flask *flask);
 };

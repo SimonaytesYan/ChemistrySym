@@ -7,7 +7,7 @@
 
 class Flask : public Widget
 {
-    DynArray<Particle> particles;
+    DynArray<Particle*> particles;
     double             piston_height = 0;
     double             tick          = 0;   //time between drawing
 
@@ -23,7 +23,7 @@ public :
     void Draw(sf::RenderWindow* window) override;
 
     double GetTick() { return tick; };
-    void   AddParticle(Particle particle);
+    void   AddParticle(Particle* particle);
 };
 
 #endif //SYM_FLASK
