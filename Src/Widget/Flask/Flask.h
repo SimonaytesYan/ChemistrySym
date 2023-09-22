@@ -8,8 +8,8 @@
 class Flask : public Widget
 {
     DynArray<Particle*> particles;
-    double             piston_height = 0;
-    double             tick          = 0;   //time between drawing
+    double              piston_height = 0;
+    double              tick          = 0;   //time between drawing
 
 public : 
     

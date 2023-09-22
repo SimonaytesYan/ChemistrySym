@@ -15,8 +15,12 @@ int main()
 
     Flask flask(0, 0, 800, 800);
 
-    flask.AddParticle(new CircleParticle(Vector(600, 600), Vector(0.1, 0.1), 10));
-    flask.AddParticle(new SquareParticle(Vector(500, 500), Vector(0.1, 0.1), 10));
+	for (int i = 0; i < 15; i++)
+	{
+    	flask.AddParticle(new CircleParticle(Vector(rand() % 800, rand() % 800), 
+											 Vector(0.5 - rand() / RAND_MAX, 0.5 - rand() / RAND_MAX), 
+											 10));
+	}
 
 	while (window.isOpen())
 	{
@@ -37,7 +41,7 @@ int main()
         flask.Draw(&window);
 		window.display();
 
-        //int k = 0;
-        //scanf("%c", &k);
+		//int k = 0;
+		//scanf("%c\n", &k);
     }
 }
