@@ -6,18 +6,18 @@
 
 #include "../Vector/Vector.h"
 
-const int kThicknessWeight = 10;
-
 class Widget
 {
     sf::RenderTexture texture;
     Vector            position;
+    int               border_thickness;    
 
 public : 
-    Widget(double x0, double y0, double width, double height);
+    Widget(double x0, double y0, double width, double height, int border_thickness = 10);
 
     double GetX();
     double GetY(); 
+    int    GetBorderThick();
     Vector GetSize();
 
     ~Widget();
