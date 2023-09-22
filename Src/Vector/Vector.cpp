@@ -16,6 +16,11 @@ Vector::~Vector()
     this->y = NAN;
 }
 
+void Vector::Dump()
+{
+    printf("(%lf, %lf)\n", x, y);
+}
+
 Vector operator+(const Vector& a, const Vector& b)
 {
     sf::Color new_color((a.color.r + b.color.r)/2, 

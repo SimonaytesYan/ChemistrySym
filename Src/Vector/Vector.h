@@ -22,6 +22,7 @@ public :
     double    GetY()     {return y;};
     sf::Color GetColor() {return color;};
 
+    void Dump();
     void Draw(Widget* texture, CoordSystem* coord_sys,  
                     double x0, double y0);
     inline double Length() const;
