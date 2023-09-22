@@ -20,8 +20,8 @@ CoordSystem::~CoordSystem()
 
 void CoordSystem::CoordSystemDraw(Widget* window)
 {
-    Vector OX((window->GetSize().GetX() - window->GetBorderThick()) / this->unit_x, 0);
-    Vector OY(0, (window->GetSize().GetY() - window->GetBorderThick()) / this->unit_y);
+    Vector OX((window->GetSize().GetX()) / this->unit_x, 0);
+    Vector OY(0, (window->GetSize().GetY()) / this->unit_y);
 
     OX.Draw(window, this, -(window->GetSize().GetX() / this->unit_x) / 2, 0);
     OY.Draw(window, this, 0, -(window->GetSize().GetY() / this->unit_y) / 2);

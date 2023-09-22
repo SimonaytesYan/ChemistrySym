@@ -5,9 +5,11 @@ void Particle::ChangePosition(Flask* flask)
 {
     position = position + speed * flask->GetTick();
 
-    if (position.GetX() < 0 || flask->GetSize().GetX() < position.GetX())
+    if (position.GetX() < flask->GetBorderThick() || 
+        position.GetX() > flask->GetSize().GetX() - flask->GetBorderThick() - r * 2)
         speed = Vector(-speed.GetX(), speed.GetY());
 
-    if (position.GetY() < 0 || flask->GetSize().GetY() < position.GetY())
+    if (position.GetY() < flask->GetBorderThick() || 
+        position.GetY() > flask->GetSize().GetY() - flask->GetBorderThick() - r * 2)
         speed = Vector(speed.GetX(), -speed.GetY());
 }

@@ -15,8 +15,8 @@ int main()
 
     Flask flask(0, 0, 800, 800);
 
-    flask.AddParticle(new CircleParticle(Vector(100, 100), Vector(0.5, 0.25), 10));
-    flask.AddParticle(new SquareParticle(Vector(120, 120), Vector(0.1, 0.4), 10));
+    flask.AddParticle(new CircleParticle(Vector(600, 600), Vector(0.1, 0.1), 10));
+    flask.AddParticle(new SquareParticle(Vector(500, 500), Vector(0.1, 0.1), 10));
 
 	while (window.isOpen())
 	{

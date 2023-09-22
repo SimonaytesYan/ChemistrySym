@@ -13,6 +13,7 @@ class Widget
     int               border_thickness;    
 
 public : 
+
     Widget(double x0, double y0, double width, double height, int border_thickness = 10);
 
     double GetX();

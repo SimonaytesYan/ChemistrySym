@@ -56,7 +56,8 @@ Widget::~Widget()
 
 Vector Widget::GetSize()
 {
-    return Vector(texture.getSize().x, texture.getSize().y);
+    return Vector(texture.getSize().x, 
+                  texture.getSize().y);
 }
 
 int Widget::GetBorderThick()
