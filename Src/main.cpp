@@ -15,12 +15,17 @@ int main()
 
     Flask flask(0, 0, 800, 800);
 
-	for (int i = 0; i < 15; i++)
-	{
-    	flask.AddParticle(new CircleParticle(Vector(rand() % 800, rand() % 800), 
-											 Vector(0.5 - rand() / RAND_MAX, 0.5 - rand() / RAND_MAX), 
-											 10));
-	}
+	flask.AddParticle(new SquareParticle(Vector(50, 50), Vector(0.1, 0.1), 10, 2));
+	flask.AddParticle(new SquareParticle(Vector(400, 400), Vector(-0.1, -0.1), 10, 2));
+	
+	//for (int i = 0; i < 7; i++)
+	//{
+    //	flask.AddParticle(new CircleParticle(Vector(rand() % (int)flask.GetSize().GetX(), 
+	//												rand() % (int)flask.GetSize().GetY()), 
+	//										 Vector((0.5 - rand() / RAND_MAX) / 2, 
+	//										 		(0.5 - rand() / RAND_MAX) / 2), 
+	//										 10));
+	//}
 
 	while (window.isOpen())
 	{

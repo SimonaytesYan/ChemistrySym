@@ -30,42 +30,66 @@ void DeleteTwoParticles(DynArray<Particle*>& particles, size_t i, size_t j)
     particles[j] = nullptr;
 }
 
+Vector SumSpeeds(Particle* a, Particle* b)
+{
+    double sum_mass = a->GetM() + b->GetM();
+
+    Vector imp_a    = a->GetSpeed() * a->GetM();
+    Vector imp_b    = b->GetSpeed() * b->GetM();
+
+    return (imp_a + imp_b) / sum_mass;
+}
+
+SquareParticle* BumpParticles(Particle* a, Particle* b)
+{
+    return new SquareParticle((a->GetPosition() + b->GetPosition()) / 2,
+                               SumSpeeds(a, b),
+                               10,
+                               a->GetM() + b->GetM());
+}
+
 void ReactCircleCircle(DynArray<Particle*> &particles, size_t i, size_t j)
 {
     //fprintf(stderr, "Collide Circles\n");
-
     assert(i != j);
 
-    CircleParticle* part_i = (CircleParticle*)particles[i];
-    CircleParticle* part_j = (CircleParticle*)particles[j];
-
-    double sum_mass = part_i->GetM() + part_j->GetM();
-    Vector imp_i    = part_i->GetSpeed() * part_i->GetM();
-    Vector imp_j    = part_j->GetSpeed() * part_j->GetM();
-    SquareParticle* result = new SquareParticle((part_i->GetPosition() + part_j->GetPosition()) / 2,
-                                                 (imp_i + imp_j) /sum_mass,
-                                                 10,
-                                                 sum_mass);
+    SquareParticle* result = BumpParticles(particles[i], particles[j]);
 
     DeleteTwoParticles(particles, i, j);
-
     particles.PushBack(result);
 }
 
 void ReactCircleRect(DynArray<Particle*> &particles, size_t i, size_t j)
 {
-    
+    ReactCircleCircle(particles, i, j);
 }
 
 void ReactRectCircle(DynArray<Particle*> &particles, size_t i, size_t j)
 {
-
+    ReactCircleCircle(particles, i, j);
 }
 
 
 void ReactRectRect(DynArray<Particle*> &particles, size_t i, size_t j)
 {
+    SquareParticle* part_i = (SquareParticle*)particles[i];
+    SquareParticle* part_j = (SquareParticle*)particles[j];
     
+    int    sum_mass  = part_i->GetM() + part_j->GetM();
+    Vector center    = (part_i->GetPosition() + part_j->GetPosition()) / 2;
+
+    for (int i = 0; i < sum_mass; i++)
+    {
+        fprintf(stderr, "i = %d\n", i);
+        double deg = rand() % 360;
+
+        Vector new_pos   = (Vector(part_i->GetR() * 5, 0) ^ deg) + center;
+        Vector new_speed = (!(new_pos - center)) * (rand() + 1) / RAND_MAX;
+
+        particles.PushBack(new CircleParticle(new_pos, new_speed, 10, 1));
+    }
+
+    DeleteTwoParticles(particles, i, j);
 }
 
 void CollideParticles(DynArray<Particle*> &particles, size_t i, size_t j)

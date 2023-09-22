@@ -33,7 +33,8 @@ public :
     type (_type),
     position (_position),
     speed (_speed),
-    r (_r)
+    r (_r),
+    m (_m)
     {};
 
     ParticleTypes GetType()     { return type;     };
