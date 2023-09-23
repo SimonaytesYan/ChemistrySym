@@ -3,7 +3,7 @@
 
 void CircleParticle::Draw(Flask* flask)
 {
-    sf::CircleShape shape(r);
+    sf::CircleShape shape(GetR());
 
     shape.setFillColor(sf::Color::Red);
     shape.setPosition(position.GetX(), position.GetY());

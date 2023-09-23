@@ -20,7 +20,7 @@ void AddSquareParticle(Flask* flask)
     Vector speed(rand() / (double)RAND_MAX - 0.5, 
 				 rand() / (double)RAND_MAX - 0.5);
 
-    flask->AddParticle(new SquareParticle(pos, speed, 10, 2));
+    flask->AddParticle(new SquareParticle(pos, speed));
 }
 
 void AddCircleParticle(Flask* flask)
@@ -31,7 +31,7 @@ void AddCircleParticle(Flask* flask)
     Vector speed(rand() / (double)RAND_MAX - 0.5, 
 				 rand() / (double)RAND_MAX - 0.5);
 
-    flask->AddParticle(new CircleParticle(pos, speed, 10));
+    flask->AddParticle(new CircleParticle(pos, speed));
 }
 
 void RaisePistole(Flask* flask)

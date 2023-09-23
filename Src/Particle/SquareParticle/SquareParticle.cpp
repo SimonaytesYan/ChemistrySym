@@ -4,9 +4,9 @@
 
 void SquareParticle::Draw(Flask *flask)
 {
-    sf::RectangleShape shape(sf::Vector2f(2 * r, 2 * r));
+    sf::RectangleShape shape(sf::Vector2f(2 * GetR(), 2 * GetR()));
 
-    shape.setFillColor(sf::Color::Red);
+    shape.setFillColor(sf::Color::Green);
     shape.setPosition(position.GetX(), position.GetY());
 
     flask->DrawInside(shape);

@@ -12,8 +12,8 @@ void Particle::ChangePosition(Flask* flask)
 {
     position = position + speed * flask->GetTick();
 
-    double right_border  = flask->GetSize().GetX() - flask->GetBorderThick() - r * 2;
-    double bottom_border = flask->GetSize().GetY() - flask->GetBorderThick() - r * 2;
+    double right_border  = flask->GetSize().GetX() - flask->GetBorderThick() - GetR() * 2;
+    double bottom_border = flask->GetSize().GetY() - flask->GetBorderThick() - GetR() * 2;
     double top_border    = flask->GetBorderThick() + flask->GetPistonHeight();
     double left_border   = flask->GetBorderThick();
 
@@ -77,7 +77,6 @@ SquareParticle* BumpParticles(Particle* a, Particle* b)
 {
     return new SquareParticle((a->GetPosition() + b->GetPosition()) / 2,
                                SumSpeeds(a, b),
-                               10,
                                a->GetM() + b->GetM());
 }
 
@@ -116,7 +115,7 @@ void ReactRectRect(DynArray<Particle*> &particles, size_t i, size_t j)
         Vector new_pos   = (Vector(part_i->GetR() * 5, 0) ^ deg) + center;
         Vector new_speed = (!(new_pos - center)) * (rand() + 1) / RAND_MAX;
 
-        particles.PushBack(new CircleParticle(new_pos, new_speed, 10, 1));
+        particles.PushBack(new CircleParticle(new_pos, new_speed, 1));
     }
 
     DeleteTwoParticles(particles, i, j);
