@@ -13,12 +13,14 @@ class Flask : public Widget
 
 public : 
     
-    Flask(double _x0,
-          double _y0,
-          double _width,
-          double _height,
-          double _piston_height = 0, 
-          double _tick          = 0.1);
+    Flask(double    _x0,
+          double    _y0,
+          double    _width,
+          double    _height,
+          double    _piston_height    = 0, 
+          double    _tick             = 0.1,
+          double    _border_thickness = 10,
+          sf::Color _border_color     = sf::Color::White);
     
     void Draw(sf::RenderWindow* window) override;
     

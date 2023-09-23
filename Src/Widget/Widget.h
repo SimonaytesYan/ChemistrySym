@@ -12,12 +12,14 @@ class Widget
     Vector            position;
     int               border_thickness;    
     sf::Texture       background;
+    sf::Color         border_color;
 
 public : 
 
     Widget(double x0, double y0, double width, double height, 
-           int border_thickness   = 10, 
-           sf::Texture background = sf::Texture());
+           int         border_thickness = 10,
+           sf::Color   border_color     = sf::Color::White,
+           sf::Texture background       = sf::Texture());
 
     double GetX();
     double GetY(); 

@@ -10,7 +10,7 @@ void Widget::Draw(sf::RenderWindow* window)      //Clear Widget
     frame.setFillColor(sf::Color::Transparent);
     
     frame.setOutlineThickness(border_thickness);
-    frame.setOutlineColor(sf::Color(255, 255, 255));
+    frame.setOutlineColor(border_color);
 
     this->texture.draw(frame);
 
@@ -33,14 +33,15 @@ bool Widget::Inside_p(double x, double y)
             GetY() < y && y < GetY() + texture.getSize().y);
 }
 
-Widget::Widget(double x0, double y0, double width, double height, 
-               int border_thickness, sf::Texture _background) :
+Widget::Widget(double x0, double y0, double width, double height,
+               int border_thickness, sf::Color _border_color,
+               sf::Texture _background) :
 position (Vector(x0, y0)),
 border_thickness (border_thickness),
-background (_background)
+background (_background),
+border_color (_border_color)
 {
     texture.create(width, height); 
-
     texture.draw(sf::Sprite(background));
 }
 

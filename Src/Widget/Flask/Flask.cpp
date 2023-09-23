@@ -3,13 +3,15 @@
 const double kBoltzmannConst = 1.38e-1;
 const double kAccuracy       = 1e-6;
 
-Flask::Flask(double _x0,
-             double _y0,
-             double _width,
-             double _height,
-             double _piston_height, 
-             double _tick) : 
-Widget(_x0, _y0, _width, _height),
+Flask::Flask(double    _x0,
+             double    _y0,
+             double    _width,
+             double    _height,
+             double    _piston_height, 
+             double    _tick,
+             double    _border_thickness,
+             sf::Color _border_color) : 
+Widget       (_x0, _y0, _width, _height, _border_thickness, _border_color),
 piston_height(_piston_height),
 tick         (_tick),
 particles    (DynArray<Particle*>(0))

@@ -18,8 +18,9 @@ public :
            double          _height,
            OnClickFunction on_click_func, 
            double          _border_thickness = 10,
+           sf::Color       _border_color     = sf::Color::White,
            sf::Texture     _background       = sf::Texture()) :
-    Widget(_x0, _y0, _width, _height, _border_thickness, _background),
+    Widget(_x0, _y0, _width, _height, _border_thickness, _border_color, _background),
     on_click (on_click_func)
     {};
 };
