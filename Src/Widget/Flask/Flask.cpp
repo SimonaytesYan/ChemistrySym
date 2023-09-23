@@ -30,7 +30,6 @@ void Swap(T* a, T* b)
 
 void Flask::Draw(sf::RenderWindow* window)
 {
-    //fprintf(stderr, "Start draw\n");
     int particles_number = particles.GetLength();
 
     for (int i = 0; i < particles_number; i++)
@@ -63,8 +62,6 @@ void Flask::Draw(sf::RenderWindow* window)
             i--;
         }
     }
-
-    //fprintf(stderr, "End draw\n");
 }
 
 //E = 3/2 * k * T
@@ -80,10 +77,8 @@ double Flask::CalcTemp()
     }
 
     t *= 3/2 * kBoltzmannConst / particles.GetLength();
-
     return t;
 }
-
 
 void Flask::ChangeTemp(double delta_t)
 {

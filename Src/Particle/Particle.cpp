@@ -58,7 +58,6 @@ SquareParticle* BumpParticles(Particle* a, Particle* b)
 
 void ReactCircleCircle(DynArray<Particle*> &particles, size_t i, size_t j)
 {
-    //fprintf(stderr, "Collide Circles\n");
     assert(i != j);
 
     SquareParticle* result = BumpParticles(particles[i], particles[j]);
@@ -106,13 +105,9 @@ void CollideParticles(DynArray<Particle*> &particles, size_t i, size_t j)
     Particle* part_i = particles[i];
     Particle* part_j = particles[j];
 
-    //fprintf(stderr, "Collide parts\n");
-
     if ((part_i->GetPosition() - part_j->GetPosition()).Length() < 
          part_i->GetR() + part_j->GetR())
     {
         (*Table[particles[i]->GetType()][particles[j]->GetType()])(particles, i, j);
     }
-
-    //fprintf(stderr, "End collide\n");
 }
