@@ -12,18 +12,41 @@ void Particle::ChangePosition(Flask* flask)
 {
     position = position + speed * flask->GetTick();
 
-    double right_border  = flask->GetSize().GetX() - flask->GetBorderThick();
-    double bottom_border = flask->GetSize().GetY() - flask->GetBorderThick();
+    double right_border  = flask->GetSize().GetX() - flask->GetBorderThick() - r * 2;
+    double bottom_border = flask->GetSize().GetY() - flask->GetBorderThick() - r * 2;
     double top_border    = flask->GetBorderThick() + flask->GetPistonHeight();
     double left_border   = flask->GetBorderThick();
 
-    if (position.GetX()       < left_border  && speed.GetX() < 0 || 
-        position.GetX() + 2*r > right_border && speed.GetX() > 0)
-        speed = Vector(-speed.GetX(), speed.GetY());
+    if (position.GetX() < left_border)
+    {
+        position = Vector(left_border, position.GetY());
 
-    if (position.GetY()       < top_border    && speed.GetY() < 0 || 
-        position.GetY() + 2*r > bottom_border && speed.GetY() > 0)
-        speed = Vector(speed.GetX(), -speed.GetY());
+        if (speed.GetX() < 0)
+            speed = Vector(-speed.GetX(), speed.GetY());
+    }
+    if (position.GetX() > right_border)
+    {
+        position = Vector(right_border, position.GetY());
+
+        if (speed.GetX() > 0)
+            speed = Vector(-speed.GetX(), speed.GetY());
+    }
+
+    if (position.GetY() < top_border)
+    {
+        position = Vector(position.GetX(), top_border);
+
+        if (speed.GetY() < 0)
+            speed = Vector(speed.GetX(), -speed.GetY());
+    }
+    
+    if (position.GetY() > bottom_border)
+    {
+        position = Vector(position.GetX(), bottom_border);
+
+        if (speed.GetY() > 0)
+            speed = Vector(speed.GetX(), -speed.GetY());
+    }
 }
 
 void Particle::ChangeSpeed(double new_speed_module)
