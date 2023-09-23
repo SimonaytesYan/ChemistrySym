@@ -3,6 +3,8 @@
 #include "Widget/Flask/Flask.h"
 #include "Particle/CircleParticle/CircleParticle.h"
 #include "Particle/SquareParticle/SquareParticle.h"
+#include "Widget/Button/Button.h"
+#include "ButtonManager/ButtonManager.h"
 
 const char kWindowHeader[] = "Sphere";
 const int  kWindowSize     = 800;
@@ -12,20 +14,11 @@ int main()
     sf::RenderWindow window(sf::VideoMode(kWindowSize, kWindowSize), 
                             kWindowHeader);
 
+	ButtonManager button_man;
+	button_man.AddButton(new Button(500, 500, 50, 50, AddCircleParticle));
+	button_man.AddButton(new Button(600, 600, 50, 50, AddSquareParticle));
 
-    Flask flask(0, 0, 800, 800);
-
-	flask.AddParticle(new SquareParticle(Vector(50, 50), Vector(0.1, 0.1), 10, 2));
-	flask.AddParticle(new SquareParticle(Vector(400, 400), Vector(-0.1, -0.1), 10, 2));
-	
-	//for (int i = 0; i < 7; i++)
-	//{
-    //	flask.AddParticle(new CircleParticle(Vector(rand() % (int)flask.GetSize().GetX(), 
-	//												rand() % (int)flask.GetSize().GetY()), 
-	//										 Vector((0.5 - rand() / RAND_MAX) / 2, 
-	//										 		(0.5 - rand() / RAND_MAX) / 2), 
-	//										 10));
-	//}
+    Flask flask(0, 0, 400, 400);
 
 	while (window.isOpen())
 	{
@@ -38,11 +31,17 @@ int main()
 				{
 					window.close();
 				}
+
+				case sf::Event::MouseButtonPressed:
+				{
+					button_man.Click(event, &flask);
+				}
 			}
 		}
 
         window.clear();
 
+		button_man.Draw(&window);
         flask.Draw(&window);
 		window.display();
 

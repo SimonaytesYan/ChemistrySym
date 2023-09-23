@@ -4,10 +4,10 @@ SFML_FLAGS    = -lsfml-graphics -lsfml-window -lsfml-system
 
 EXE_FILE = Exe/run
 
-debug: vector_debug coord_sys_debug widget_debug particle_debug flask_debug circle_particle_debug square_particle_debug
-	g++ $(SFML_FLAGS) $(DEBUG_FLAGS) Src/main.cpp Obj/Vector.o Obj/CoordSystem.o Obj/Widget.o Obj/Particle.o Obj/Flask.o Obj/CircleParticle.o Obj/SquareParticle.o -o $(EXE_FILE)
-release: vector_release coord_sys_release widget_release particle_release flask_release circle_particle_release square_particle_release
-	g++ $(SFML_FLAGS) $(RELEASE_FLAGS) Src/main.cpp Obj/Vector.o Obj/CoordSystem.o Obj/Widget.o Obj/Particle.o Obj/Flask.o Obj/CircleParticle.o Obj/SquareParticle.o -o $(EXE_FILE)
+debug: vector_debug coord_sys_debug widget_debug particle_debug flask_debug circle_particle_debug square_particle_debug button_debug button_manager_debug
+	g++ $(SFML_FLAGS) $(DEBUG_FLAGS) Src/main.cpp Obj/Vector.o Obj/CoordSystem.o Obj/Widget.o Obj/Particle.o Obj/Flask.o Obj/CircleParticle.o Obj/SquareParticle.o Obj/Button.o Obj/ButtonManager.o -o $(EXE_FILE)
+release: vector_release coord_sys_release widget_release particle_release flask_release circle_particle_release square_particle_release button_release button_manager_release
+	g++ $(SFML_FLAGS) $(RELEASE_FLAGS) Src/main.cpp Obj/Vector.o Obj/CoordSystem.o Obj/Widget.o Obj/Particle.o Obj/Flask.o Obj/CircleParticle.o Obj/SquareParticle.o Obj/Button.o Obj/ButtonManager.o -o $(EXE_FILE)
 
 vector_debug:
 	g++ -c $(DEBUG_FLAGS) Src/Vector/Vector.cpp -o Obj/Vector.o
@@ -43,6 +43,16 @@ flask_debug:
 	g++ -c $(DEBUG_FLAGS) Src/Widget/Flask/Flask.cpp -o Obj/Flask.o
 flask_release:
 	g++ -c $(RELEASE_FLAGS) Src/Widget/Flask/Flask.cpp -o Obj/Flask.o
+
+button_debug:
+	g++ -c $(DEBUG_FLAGS) Src/Widget/Button/Button.cpp -o Obj/Button.o
+button_release:
+	g++ -c $(RELEASE_FLAGS) Src/Widget/Button/Button.cpp -o Obj/Button.o
+
+button_manager_debug:
+	g++ -c $(DEBUG_FLAGS) Src/ButtonManager/ButtonManager.cpp -o Obj/ButtonManager.o
+button_manager_release:
+	g++ -c $(RELEASE_FLAGS) Src/ButtonManager/ButtonManager.cpp -o Obj/ButtonManager.o
 
 run:
 	./$(EXE_FILE)

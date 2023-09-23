@@ -69,7 +69,6 @@ void ReactRectCircle(DynArray<Particle*> &particles, size_t i, size_t j)
     ReactCircleCircle(particles, i, j);
 }
 
-
 void ReactRectRect(DynArray<Particle*> &particles, size_t i, size_t j)
 {
     SquareParticle* part_i = (SquareParticle*)particles[i];
@@ -80,7 +79,6 @@ void ReactRectRect(DynArray<Particle*> &particles, size_t i, size_t j)
 
     for (int i = 0; i < sum_mass; i++)
     {
-        fprintf(stderr, "i = %d\n", i);
         double deg = rand() % 360;
 
         Vector new_pos   = (Vector(part_i->GetR() * 5, 0) ^ deg) + center;
