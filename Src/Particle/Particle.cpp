@@ -24,6 +24,11 @@ void Particle::ChangePosition(Flask* flask)
         speed = Vector(speed.GetX(), -speed.GetY());
 }
 
+void Particle::ChangeSpeed(double new_speed_module)
+{
+    speed = !speed * new_speed_module;
+}
+
 void DeleteTwoParticles(DynArray<Particle*>& particles, size_t i, size_t j)
 {
     delete particles[i];

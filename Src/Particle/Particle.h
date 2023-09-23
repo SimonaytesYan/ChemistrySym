@@ -46,6 +46,7 @@ public :
     virtual void Draw(Flask *flask) = 0;
 
     void ChangePosition(Flask *flask);
+    void ChangeSpeed(double new_speed_module);
 };
 
 void CollideParticles(DynArray<Particle*> &particles, size_t i, size_t j);
