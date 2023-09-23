@@ -12,13 +12,14 @@ public :
 
     OnClickFunction on_click;
 
-    Button(double x0, 
-           double y0, 
-           double width, 
-           double height,
+    Button(double          _x0, 
+           double          _y0, 
+           double          _width, 
+           double          _height,
            OnClickFunction on_click_func, 
-           double border_thickness = 10) :
-    Widget(x0, y0, width, height, border_thickness),
+           double          _border_thickness = 10,
+           sf::Texture     _background       = sf::Texture()) :
+    Widget(_x0, _y0, _width, _height, _border_thickness, _background),
     on_click (on_click_func)
     {};
 };

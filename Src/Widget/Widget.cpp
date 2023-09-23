@@ -22,6 +22,8 @@ void Widget::Draw(sf::RenderWindow* window)      //Clear Widget
 	window->draw(sprite);
     
     this->texture.clear();
+    
+    texture.draw(sf::Sprite(background));
 }
 
 
@@ -31,11 +33,15 @@ bool Widget::Inside_p(double x, double y)
             GetY() < y && y < GetY() + texture.getSize().y);
 }
 
-Widget::Widget(double x0, double y0, double width, double height, int border_thickness) :
+Widget::Widget(double x0, double y0, double width, double height, 
+               int border_thickness, sf::Texture _background) :
 position (Vector(x0, y0)),
-border_thickness (border_thickness)
+border_thickness (border_thickness),
+background (_background)
 {
     texture.create(width, height); 
+
+    texture.draw(sf::Sprite(background));
 }
 
 double Widget::GetX() 

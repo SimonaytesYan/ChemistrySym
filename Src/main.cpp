@@ -14,13 +14,16 @@ int main()
     sf::RenderWindow window(sf::VideoMode(kWindowSize, kWindowSize), 
                             kWindowHeader);
 
+	sf::Texture texture;
+	texture.loadFromFile("Resources/carbon.jpg");
+
 	ButtonManager button_man;
-	button_man.AddButton(new Button(25,  450, 100, 50, AddCircleParticle));
-	button_man.AddButton(new Button(150, 450, 100, 50, AddSquareParticle));
-	button_man.AddButton(new Button(275, 450, 100, 50, IncreaseTemperature));
-	button_man.AddButton(new Button(400, 450, 100, 50, DecreaseTemperature));
-	button_man.AddButton(new Button(525, 450, 100, 50, RaisePistole));
-	button_man.AddButton(new Button(650, 450, 100, 50, DropPistole));
+	button_man.AddButton(new Button(25,  450, 100, 50, AddCircleParticle, 5, texture));
+	button_man.AddButton(new Button(150, 450, 100, 50, AddSquareParticle, 5, texture));
+	button_man.AddButton(new Button(275, 450, 100, 50, IncreaseTemperature, 5, texture));
+	button_man.AddButton(new Button(400, 450, 100, 50, DecreaseTemperature, 5, texture));
+	button_man.AddButton(new Button(525, 450, 100, 50, RaisePistole, 5, texture));
+	button_man.AddButton(new Button(650, 450, 100, 50, DropPistole, 5, texture));
 
     Flask flask(0, 0, 525, 400);
 
