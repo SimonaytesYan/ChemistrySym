@@ -37,6 +37,12 @@ void Flask::Draw(sf::RenderWindow* window)
         particles[i]->Draw(this);
     }
 
+    sf::RectangleShape piston(sf::Vector2f(GetSize().GetX(), GetBorderThick() * 2));
+    piston.setPosition(sf::Vector2f(GetX(), GetY() + piston_height));
+    piston.setFillColor(sf::Color::Blue);
+
+    DrawInside(piston);
+
     Widget::Draw(window);
 
     for (int i = 0; i < particles_number; i++)
@@ -92,4 +98,11 @@ void Flask::ChangeTemp(double delta_t)
         if (sqrt(v1 * v1 + 2 * delta_t / m) > kAccuracy)
             particles[i]->ChangeSpeed(sqrt(v1 * v1 + 2 * delta_t / m));
     }
+}
+
+void Flask::ChangePistonHeight(double delta)
+{
+    piston_height += delta;
+    if (piston_height < 0)
+        piston_height = 0;
 }

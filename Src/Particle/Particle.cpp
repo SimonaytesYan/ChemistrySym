@@ -14,13 +14,15 @@ void Particle::ChangePosition(Flask* flask)
 
     double right_border  = flask->GetSize().GetX() - flask->GetBorderThick();
     double bottom_border = flask->GetSize().GetY() - flask->GetBorderThick();
+    double top_border    = flask->GetBorderThick() + flask->GetPistonHeight();
+    double left_border   = flask->GetBorderThick();
 
-    if (position.GetX()       < flask->GetBorderThick() && speed.GetX() < 0 || 
-        position.GetX() + 2*r > right_border            && speed.GetX() > 0)
+    if (position.GetX()       < left_border  && speed.GetX() < 0 || 
+        position.GetX() + 2*r > right_border && speed.GetX() > 0)
         speed = Vector(-speed.GetX(), speed.GetY());
 
-    if (position.GetY() < flask->GetBorderThick() && speed.GetY() < 0 || 
-        position.GetY() + 2*r > bottom_border     && speed.GetY() > 0)
+    if (position.GetY()       < top_border    && speed.GetY() < 0 || 
+        position.GetY() + 2*r > bottom_border && speed.GetY() > 0)
         speed = Vector(speed.GetX(), -speed.GetY());
 }
 

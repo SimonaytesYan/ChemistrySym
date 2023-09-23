@@ -26,7 +26,8 @@ void AddSquareParticle(Flask* flask)
 void AddCircleParticle(Flask* flask)
 {
     Vector pos  (rand() % (int)flask->GetSize().GetX(), 
-			     rand() % (int)flask->GetSize().GetY());
+			     rand() % (int)(flask->GetSize().GetY() - flask->GetPistonHeight()) 
+                 + flask->GetPistonHeight());
     Vector speed(rand() / (double)RAND_MAX - 0.5, 
 				 rand() / (double)RAND_MAX - 0.5);
 
@@ -35,11 +36,11 @@ void AddCircleParticle(Flask* flask)
 
 void RaisePistole(Flask* flask)
 {
-
+    flask->ChangePistonHeight(10);
 }
 
 void DropPistole(Flask* flask)
 {
-
+    flask->ChangePistonHeight(-10);
 }
 

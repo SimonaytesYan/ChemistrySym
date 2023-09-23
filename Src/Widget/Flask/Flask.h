@@ -24,8 +24,12 @@ public :
     
     double CalcTemp();
     void   ChangeTemp(double delta);
-    double GetTick() { return tick; };
+    void   ChangePistonHeight(double delta);
+
     void   AddParticle(Particle* particle);
+    
+    double GetTick        () { return tick;          };
+    double GetPistonHeight() { return piston_height; };
 };
 
 #endif //SYM_FLASK

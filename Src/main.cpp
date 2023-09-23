@@ -19,6 +19,8 @@ int main()
 	button_man.AddButton(new Button(150, 450, 100, 50, AddSquareParticle));
 	button_man.AddButton(new Button(275, 450, 100, 50, IncreaseTemperature));
 	button_man.AddButton(new Button(400, 450, 100, 50, DecreaseTemperature));
+	button_man.AddButton(new Button(525, 450, 100, 50, RaisePistole));
+	button_man.AddButton(new Button(650, 450, 100, 50, DropPistole));
 
     Flask flask(0, 0, 525, 400);
 
