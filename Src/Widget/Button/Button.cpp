@@ -17,8 +17,8 @@ void AddSquareParticle(Flask* flask)
 {
     Vector pos  (rand() % (int)flask->GetSize().GetX(), 
 			     rand() % (int)flask->GetSize().GetY());
-    Vector speed((0.5 - rand() / RAND_MAX) / 2, 
-				 (0.5 - rand() / RAND_MAX) / 2);
+    Vector speed(rand() / (double)RAND_MAX - 0.5, 
+				 rand() / (double)RAND_MAX - 0.5);
 
     flask->AddParticle(new SquareParticle(pos, speed, 10, 2));
 }
@@ -27,8 +27,8 @@ void AddCircleParticle(Flask* flask)
 {
     Vector pos  (rand() % (int)flask->GetSize().GetX(), 
 			     rand() % (int)flask->GetSize().GetY());
-    Vector speed((0.5 - rand() / RAND_MAX) / 2, 
-				 (0.5 - rand() / RAND_MAX) / 2);
+    Vector speed(rand() / (double)RAND_MAX - 0.5, 
+				 rand() / (double)RAND_MAX - 0.5);
 
     flask->AddParticle(new CircleParticle(pos, speed, 10));
 }
