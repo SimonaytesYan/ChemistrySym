@@ -12,12 +12,15 @@ void Particle::ChangePosition(Flask* flask)
 {
     position = position + speed * flask->GetTick();
 
-    if (position.GetX() < flask->GetBorderThick() || 
-        position.GetX() > flask->GetSize().GetX() - flask->GetBorderThick() - r * 2)
+    double right_border  = flask->GetSize().GetX() - flask->GetBorderThick();
+    double bottom_border = flask->GetSize().GetY() - flask->GetBorderThick();
+
+    if (position.GetX()       < flask->GetBorderThick() && speed.GetX() < 0 || 
+        position.GetX() + 2*r > right_border            && speed.GetX() > 0)
         speed = Vector(-speed.GetX(), speed.GetY());
 
-    if (position.GetY() < flask->GetBorderThick() || 
-        position.GetY() > flask->GetSize().GetY() - flask->GetBorderThick() - r * 2)
+    if (position.GetY() < flask->GetBorderThick() && speed.GetY() < 0 || 
+        position.GetY() + 2*r > bottom_border     && speed.GetY() > 0)
         speed = Vector(speed.GetX(), -speed.GetY());
 }
 
@@ -99,7 +102,6 @@ void CollideParticles(DynArray<Particle*> &particles, size_t i, size_t j)
     Particle* part_j = particles[j];
 
     //fprintf(stderr, "Collide parts\n");
-
 
     if ((part_i->GetPosition() - part_j->GetPosition()).Length() < 
          part_i->GetR() + part_j->GetR())
