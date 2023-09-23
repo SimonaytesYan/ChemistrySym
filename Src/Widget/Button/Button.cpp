@@ -5,12 +5,12 @@
 
 void IncreaseTemperature(Flask* flask)
 {
-
+    flask->ChangeTemp(1);
 }
 
 void DecreaseTemperature(Flask* flask)
 {
-
+    flask->ChangeTemp(-1);
 }
 
 void AddSquareParticle(Flask* flask)

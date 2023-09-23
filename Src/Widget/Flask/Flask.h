@@ -21,7 +21,9 @@ public :
           double _tick          = 0.1);
     
     void Draw(sf::RenderWindow* window) override;
-
+    
+    double CalcTemp();
+    void   ChangeTemp(double delta);
     double GetTick() { return tick; };
     void   AddParticle(Particle* particle);
 };

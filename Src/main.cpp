@@ -15,10 +15,12 @@ int main()
                             kWindowHeader);
 
 	ButtonManager button_man;
-	button_man.AddButton(new Button(500, 500, 50, 50, AddCircleParticle));
-	button_man.AddButton(new Button(600, 600, 50, 50, AddSquareParticle));
+	button_man.AddButton(new Button(25,  450, 100, 50, AddCircleParticle));
+	button_man.AddButton(new Button(150, 450, 100, 50, AddSquareParticle));
+	button_man.AddButton(new Button(275, 450, 100, 50, IncreaseTemperature));
+	button_man.AddButton(new Button(400, 450, 100, 50, DecreaseTemperature));
 
-    Flask flask(0, 0, 400, 400);
+    Flask flask(0, 0, 525, 400);
 
 	while (window.isOpen())
 	{

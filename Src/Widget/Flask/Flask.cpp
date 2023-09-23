@@ -1,5 +1,8 @@
 #include "Flask.h"
 
+const double kBoltzmannConst = 1.38e-1;
+const double kAccuracy       = 1e-6;
+
 Flask::Flask(double _x0,
              double _y0,
              double _width,
@@ -62,4 +65,36 @@ void Flask::Draw(sf::RenderWindow* window)
     }
 
     //fprintf(stderr, "End draw\n");
+}
+
+//E = 3/2 * k * T
+
+double Flask::CalcTemp()
+{
+    double t = 0;
+    
+    for (int i = 0; i < particles.GetLength(); i++)
+    {
+        t += particles[i]->GetM() * particles[i]->GetSpeed().Length() * 
+                                    particles[i]->GetSpeed().Length() / 2;
+    }
+
+    t *= 3/2 * kBoltzmannConst / particles.GetLength();
+
+    return t;
+}
+
+
+void Flask::ChangeTemp(double delta_t)
+{
+    delta_t *= 3/2 * kBoltzmannConst;
+
+    for (int i = 0; i < particles.GetLength(); i++)
+    {
+        double v1 = particles[i]->GetSpeed().Length();
+        double m  = particles[i]->GetM();
+
+        if (sqrt(v1 * v1 + 2 * delta_t / m) > kAccuracy)
+            particles[i]->ChangeSpeed(sqrt(v1 * v1 + 2 * delta_t / m));
+    }
 }
