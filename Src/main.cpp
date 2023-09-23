@@ -13,9 +13,12 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(kWindowSize, kWindowSize), 
                             kWindowHeader);
-
-	sf::Texture texture;
+	sf::Texture texture, circle, square;
+	circle.loadFromFile("Resources/circle.png");
+	square.loadFromFile("Resources/square.jpg");
 	texture.loadFromFile("Resources/carbon.jpg");
+
+	Widget background(0, 0, window.getSize().x, window.getSize().y, 0);
 
 	ButtonManager button_man;
 	button_man.AddButton(new Button(25,  450, 100, 50, AddCircleParticle, 5, texture));
@@ -48,8 +51,10 @@ int main()
 
         window.clear();
 
+		background.Draw(&window);
 		button_man.Draw(&window);
         flask.Draw(&window);
+
 		window.display();
 
 		//int k = 0;

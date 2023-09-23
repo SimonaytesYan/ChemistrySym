@@ -37,7 +37,7 @@ void Flask::Draw(sf::RenderWindow* window)
         particles[i]->Draw(this);
     }
 
-    sf::RectangleShape piston(sf::Vector2f(GetSize().GetX(), GetBorderThick() * 2));
+    sf::RectangleShape piston(sf::Vector2f(GetSize().GetX(), GetBorderThick()));
     piston.setPosition(sf::Vector2f(GetX(), GetY() + piston_height));
     piston.setFillColor(sf::Color::Blue);
 
