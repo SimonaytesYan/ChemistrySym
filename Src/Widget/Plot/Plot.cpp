@@ -26,25 +26,22 @@ void Plot::Draw(sf::RenderWindow* window)
 {
     coord_sys.Draw(this);
 
-    sf::VertexArray array(sf::Lines, (data.GetLength() - 1) * 2);
-
-    for (int i = 1; i < data.GetLength(); i++)
+    if (data.GetLength() > 0)
     {
-        //printf("x0, y0 = (%lg, %lg)\n", data[i].GetX(), data[i].GetY());
-        
-        double x1 = coord_sys.СoordRecalcX(data[i - 1].GetX());
-        double y1 = coord_sys.СoordRecalcY(data[i - 1].GetY());
-        double x2 = coord_sys.СoordRecalcX(data[i].GetX());
-        double y2 = coord_sys.СoordRecalcY(data[i].GetY());
+        sf::VertexArray array(sf::Lines, (data.GetLength() - 1) * 2);
 
-        array[2 * i - 2] = sf::Vertex(sf::Vector2f(x1, y1), plot_color);
-        array[2 * i - 1] = sf::Vertex(sf::Vector2f(x2, y2), plot_color);
+        for (int i = 1; i < data.GetLength(); i++)
+        {
+            double x1 = coord_sys.СoordRecalcX(data[i - 1].GetX());
+            double y1 = coord_sys.СoordRecalcY(data[i - 1].GetY());
+            double x2 = coord_sys.СoordRecalcX(data[i].GetX());
+            double y2 = coord_sys.СoordRecalcY(data[i].GetY());
 
-        //sf::CircleShape circle(1);
-        //circle.setPosition(sf::Vector2f(x, y));
-        //circle.setFillColor(plot_color);
+            array[2 * i - 2] = sf::Vertex(sf::Vector2f(x1, y1), plot_color);
+            array[2 * i - 1] = sf::Vertex(sf::Vector2f(x2, y2), plot_color);
+        }
+
+        this->DrawInside(array);
     }
-
-    this->DrawInside(array);
     Widget::Draw(window);
 }

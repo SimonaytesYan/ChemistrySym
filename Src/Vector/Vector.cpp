@@ -82,44 +82,16 @@ Vector operator^(const Vector& a, double b)
 static void DrawTriangleTip(Widget* window, CoordSystem* coord_sys, 
                             Vector* vec, double x0, double y0)
 {
-    double x1 = vec->GetX() + x0;
-    double y1 = vec->GetY() + y0;
+    double x1 = coord_sys->СoordRecalcX(vec->GetX() + x0);
+    double y1 = coord_sys->СoordRecalcY(vec->GetY() + y0);
 
-    Vector left_side  = -(!(*vec)) * 10;
-    Vector right_side = -(!(*vec)) * 10;
+    Vector v0(coord_sys->СoordRecalcX(vec->GetX()), coord_sys->СoordRecalcY(vec->GetY()));
 
-    left_side.Rotate(45);
-    right_side.Rotate(315);
+    Vector left_side  = -(!(v0)) * 10;
+    Vector right_side = -(!(v0)) * 10;
 
-    double vertex_coords[] = {x1, y1,
-                              left_side.GetX() + x1, left_side.GetY() + y1,
-                              right_side.GetX() + x1,right_side.GetY() + y1};
-
-    sf::VertexArray tip(sf::Triangles, 3);
-    for (int i = 0; i < 3; i++)
-    {
-        vertex_coords[i*2]     = coord_sys->СoordRecalcX(vertex_coords[i*2]);
-        vertex_coords[i*2 + 1] = coord_sys->СoordRecalcY(vertex_coords[i*2 + 1]);
-
-        tip[i] = sf::Vertex(sf::Vector2f(vertex_coords[i*2], vertex_coords[i*2 + 1]), vec->GetColor());
-    }
-
-    window->DrawInside(tip);
-}
-
-static void DrawTriangleTipOptimized(Widget* window, CoordSystem* coord_sys, 
-                                     Vector* vec, double x0, double y0)
-{
-    double x1 = vec->GetX() + x0;
-    double y1 = vec->GetY() + y0;
-
-    Vector left_normal  =   +(!(*vec) / 10);
-    Vector right_normal = -(+(!(*vec) / 10));
-
-    Vector reverse = -!(*vec) / 10;
-
-    Vector left_side  = left_normal  + reverse;
-    Vector right_side = right_normal + reverse;
+    left_side.Rotate(0);
+    right_side.Rotate(270);
 
     double vertex_coords[] = {x1, y1,
                               left_side.GetX() + x1, left_side.GetY() + y1,
@@ -127,12 +99,9 @@ static void DrawTriangleTipOptimized(Widget* window, CoordSystem* coord_sys,
 
     sf::VertexArray tip(sf::Triangles, 3);
     for (int i = 0; i < 3; i++)
-    {
-        vertex_coords[i*2]     = coord_sys->СoordRecalcX(vertex_coords[i*2]);
-        vertex_coords[i*2 + 1] = coord_sys->СoordRecalcY(vertex_coords[i*2 + 1]);
+        tip[i] = sf::Vertex(sf::Vector2f(vertex_coords[i*2], vertex_coords[i*2 + 1]), vec->GetColor()); 
 
-        tip[i] = sf::Vertex(sf::Vector2f(vertex_coords[i*2], vertex_coords[i*2 + 1]), vec->GetColor());
-    }
+    printf("\n");
 
     window->DrawInside(tip);
 }
@@ -140,7 +109,6 @@ static void DrawTriangleTipOptimized(Widget* window, CoordSystem* coord_sys,
 void Vector::Draw(Widget* window, CoordSystem* coord_sys,  
                         double x0, double y0)
 {
-    //DrawTriangleTipOptimized(window, coord_sys, this, x0, y0);
     DrawTriangleTip(window, coord_sys, this, x0, y0);
 
     double x1 = coord_sys->СoordRecalcX(x + x0);

@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <assert.h>
 
+#include "Stopwatch.h"
 #include "Widget/Flask/Flask.h"
 #include "Particle/CircleParticle/CircleParticle.h"
 #include "Particle/SquareParticle/SquareParticle.h"
@@ -67,12 +68,17 @@ int main()
 	OutputCurrentTemp(&temperature, &flask);
 
 	Plot temp_plot(600, 0,   400, 400, 
-				   50,  350, 1,  1, sf::Color(255, 128, 0));
+				   50,  350, 10,  1, sf::Color(255, 128, 0));
 
-	int time = 0;
-
+	int time   = 0;
+	int time_i = 0;
+	
+	InitTimer();
+	
 	while (window.isOpen())
 	{
+		StartTimer();
+
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -99,17 +105,19 @@ int main()
 		OutputCurrentTemp(&temperature, &flask);
 		window.draw(temperature);
 
-		if (time % 100 == 0)
+		if (time > 1e6)
 		{
-			temp_plot.AddPoint(Vector(time / 100, flask.CalcTemp()));
+			printf("time = %d\n", time);
+			time_i++;
+			temp_plot.AddPoint(Vector(time_i, flask.CalcTemp()));
+			time = 0;
 		}
 		temp_plot.Draw(&window);
 
-
 		window.display();
+		
+		StopTimer();
 
-		time++;
-		//int k = 0;
-		//scanf("%c\n", &k);
+		time += GetTimerMicroseconds();
     }
 }
