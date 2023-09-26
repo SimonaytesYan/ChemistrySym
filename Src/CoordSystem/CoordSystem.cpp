@@ -18,7 +18,7 @@ CoordSystem::~CoordSystem()
     unit_y = NAN;
 }
 
-void CoordSystem::CoordSystemDraw(Widget* window)
+void CoordSystem::Draw(Widget* window)
 {
     Vector OX((window->GetSize().GetX()) / this->unit_x, 0);
     Vector OY(0, (window->GetSize().GetY()) / this->unit_y);

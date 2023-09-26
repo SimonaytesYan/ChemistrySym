@@ -84,12 +84,9 @@ static void DrawTriangleTip(Widget* window, CoordSystem* coord_sys,
 {
     double x1 = vec->GetX() + x0;
     double y1 = vec->GetY() + y0;
-    
-    double normal_x = -vec->GetX() / vec->Length() / 10;
-    double normal_y = -vec->GetY() / vec->Length() / 10;
 
-    Vector left_side  = -(!(*vec)) / 10;
-    Vector right_side = -(!(*vec)) / 10;
+    Vector left_side  = -(!(*vec)) * 10;
+    Vector right_side = -(!(*vec)) * 10;
 
     left_side.Rotate(45);
     right_side.Rotate(315);
@@ -143,8 +140,9 @@ static void DrawTriangleTipOptimized(Widget* window, CoordSystem* coord_sys,
 void Vector::Draw(Widget* window, CoordSystem* coord_sys,  
                         double x0, double y0)
 {
-    DrawTriangleTipOptimized(window, coord_sys, this, x0, y0);
-    
+    //DrawTriangleTipOptimized(window, coord_sys, this, x0, y0);
+    DrawTriangleTip(window, coord_sys, this, x0, y0);
+
     double x1 = coord_sys->СoordRecalcX(x + x0);
     double y1 = coord_sys->СoordRecalcY(y + y0);
 

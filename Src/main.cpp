@@ -6,48 +6,70 @@
 #include "Particle/SquareParticle/SquareParticle.h"
 #include "Widget/Button/Button.h"
 #include "ButtonManager/ButtonManager.h"
+#include "Widget/Plot/Plot.h"
 
 const char kWindowHeader[] = "Sphere";
 const int  kWindowSize     = 1000;
 const int  kMaxTextLength  = 50;
 
+void CreateButtons(ButtonManager* button_man, sf::Texture textures[6])
+{
+	button_man->AddButton(new Button(25,  525, 100, 50,  AddCircleParticle,   0, sf::Color::Cyan, textures[0]));
+	button_man->AddButton(new Button(150, 525, 100, 50,  AddSquareParticle,   0, sf::Color::Cyan, textures[1]));
+	button_man->AddButton(new Button(275, 525, 100, 50,  IncreaseTemperature, 0, sf::Color::Cyan, textures[2]));
+	button_man->AddButton(new Button(400, 525, 100, 50,  DecreaseTemperature, 0, sf::Color::Cyan, textures[3]));
+	button_man->AddButton(new Button(525, 150, 50,  100, DropPistole,         0, sf::Color::Cyan, textures[4]));
+	button_man->AddButton(new Button(525, 275, 50,  100, RaisePistole,        0, sf::Color::Cyan, textures[5]));
+}
+
+void OutputCurrentTemp(sf::Text* temperature, Flask* flask)
+{
+	char text[kMaxTextLength] = {};
+    sprintf(text, "t = %.2lf", flask->CalcTemp());
+	temperature->setString(text);
+}
+
+void CreateTempCounter(sf::Text* temperature, sf::Font* font)
+{
+	temperature->setPosition(sf::Vector2f(50, 800));
+	temperature->setFillColor(sf::Color::Cyan);
+    temperature->setCharacterSize(45);
+
+	assert(font->loadFromFile("Resources/Font.ttf"));
+	temperature->setFont(*font);
+}
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(kWindowSize, kWindowSize), 
                             kWindowHeader);
-	sf::Texture temp_up, temp_down;
+	sf::Texture circle, square, temp_up, temp_down;
+
+	circle.loadFromFile("Resources/circle.png");
+	square.loadFromFile("Resources/square.png");
 	temp_up.loadFromFile("Resources/TempUp.png");
 	temp_down.loadFromFile("Resources/TempDown.png");
 
-	Widget background(0, 0, window.getSize().x, window.getSize().y, 5, sf::Color::Yellow);
+	Widget background(0, 0, window.getSize().x, window.getSize().y, 0);
+	
+	sf::Texture textures[6] = {circle, square, temp_up, temp_down, 
+							  sf::Texture(), sf::Texture()};
 
 	ButtonManager button_man;
-	Button* add_square_button = new Button(150, 525, 100, 50, AddSquareParticle, 5, sf::Color::Cyan);
-	Button* add_circle_button = new Button(25,  525, 100, 50, AddCircleParticle, 5, sf::Color::Cyan);
-	button_man.AddButton(add_square_button);
-	button_man.AddButton(add_circle_button);
-	button_man.AddButton(new Button(275, 525, 100, 50, IncreaseTemperature, 5, sf::Color::Cyan, temp_up));
-	button_man.AddButton(new Button(400, 525, 100, 50, DecreaseTemperature, 5, sf::Color::Cyan, temp_down));
-
-	Button* pistol_up   = new Button(525, 150, 50, 100, DropPistole,  5, sf::Color::Cyan);
-	Button* pistol_down = new Button(525, 275, 50, 100, RaisePistole, 5, sf::Color::Cyan);
-	button_man.AddButton(pistol_up);
-	button_man.AddButton(pistol_down);
+	CreateButtons(&button_man, textures);
 
     Flask flask(0, 0, 500, 500);
 
 	sf::Text temperature;
-	temperature.setPosition(sf::Vector2f(550, 50));
-	temperature.setFillColor(sf::Color::Cyan);
-    temperature.setCharacterSize(45);
-
 	sf::Font font;
-	assert(font.loadFromFile("Resources/Font.ttf"));
-	temperature.setFont(font);
 
-	char text[kMaxTextLength] = {};
-    sprintf(text, "t = %lf", flask.CalcTemp());
-	temperature.setString(text);
+	CreateTempCounter(&temperature, &font);
+	OutputCurrentTemp(&temperature, &flask);
+
+	Plot temp_plot(600, 0,   400, 400, 
+				   50,  350, 1,  1, sf::Color(255, 128, 0));
+
+	int time = 0;
 
 	while (window.isOpen())
 	{
@@ -70,39 +92,23 @@ int main()
 
         window.clear();
 
-		sf::RectangleShape square(sf::Vector2f(25, 25));
-		square.setFillColor(sf::Color::Green);
-		square.setPosition(37.5, 12.5);
-		add_square_button->DrawInside(square);
-
-		sf::CircleShape circle(12.5);
-		circle.setFillColor(sf::Color::Red);
-		circle.setPosition(37.5, 12.5);
-		add_circle_button->DrawInside(circle);
-
-		sf::Text pistol;
-		pistol.setFont(font);
-		pistol.setPosition(14, 20);
-		pistol.setCharacterSize(45);
-		pistol.setString("V");
-		
-
-		pistol_down->DrawInside(pistol);
-		pistol.rotate(180);
-		pistol.setPosition(37, 70);
-		pistol_up->DrawInside(pistol);
-
 		background.Draw(&window);
 		button_man.Draw(&window);
         flask.Draw(&window);
 
-    	sprintf(text, "t = %.1lf", flask.CalcTemp());
-		temperature.setString(text);
-
+		OutputCurrentTemp(&temperature, &flask);
 		window.draw(temperature);
+
+		if (time % 100 == 0)
+		{
+			temp_plot.AddPoint(Vector(time / 100, flask.CalcTemp()));
+		}
+		temp_plot.Draw(&window);
+
 
 		window.display();
 
+		time++;
 		//int k = 0;
 		//scanf("%c\n", &k);
     }

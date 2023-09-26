@@ -76,6 +76,9 @@ void Flask::Draw(sf::RenderWindow* window)
 
 double Flask::CalcTemp()
 {
+    if (particles.GetLength() == 0)
+        return 0;
+    
     double t = 0;
     
     for (int i = 0; i < particles.GetLength(); i++)

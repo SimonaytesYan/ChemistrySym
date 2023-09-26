@@ -30,9 +30,9 @@ public :
     double CoordReverseRecalcX(double x)   //from x on the window makes x in coordination system
     {return (x - x0) / unit_x;};
     double CoordReverseRecalcY(double y)   //from y on the window makes y in coordination system
-    {return -(y - y0) / unit_x;};
+    {return -(y - y0) / unit_y;};
 
-    void CoordSystemDraw(Widget* window);
+    void Draw(Widget* window);
 };
 
 #endif  //SYM_COORD_SYSTEM
