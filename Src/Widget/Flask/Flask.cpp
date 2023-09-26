@@ -1,6 +1,6 @@
 #include "Flask.h"
 
-const double kBoltzmannConst = 1.38e-1;
+const double kBoltzmannConst = 138;
 const double kAccuracy       = 1e-6;
 
 Flask::Flask(double    _x0,
@@ -84,13 +84,13 @@ double Flask::CalcTemp()
                                     particles[i]->GetSpeed().Length() / 2;
     }
 
-    t *= 3/2 * kBoltzmannConst / particles.GetLength();
+    t *= kBoltzmannConst / particles.GetLength();
     return t;
 }
 
 void Flask::ChangeTemp(double delta_t)
 {
-    delta_t *= 3/2 * kBoltzmannConst;
+    delta_t /= kBoltzmannConst;
 
     for (int i = 0; i < particles.GetLength(); i++)
     {

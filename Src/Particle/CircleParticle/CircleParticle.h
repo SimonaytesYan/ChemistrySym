@@ -8,7 +8,7 @@ class CircleParticle : public Particle
 public :
     CircleParticle(Vector _position = Vector(0, 0), 
                    Vector _speed    = Vector(0, 0),
-                   double _m        = 10) : 
+                   double _m        = 1) : 
     Particle(CIRCLE, _position, _speed, _m)
     {};
 
