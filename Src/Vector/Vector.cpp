@@ -99,9 +99,7 @@ static void DrawTriangleTip(Widget* window, CoordSystem* coord_sys,
 
     sf::VertexArray tip(sf::Triangles, 3);
     for (int i = 0; i < 3; i++)
-        tip[i] = sf::Vertex(sf::Vector2f(vertex_coords[i*2], vertex_coords[i*2 + 1]), vec->GetColor()); 
-
-    printf("\n");
+        tip[i] = sf::Vertex(sf::Vector2f(vertex_coords[i*2], vertex_coords[i*2 + 1]), vec->GetColor());
 
     window->DrawInside(tip);
 }

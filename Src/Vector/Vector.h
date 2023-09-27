@@ -29,6 +29,8 @@ public :
     double Length() const { return sqrt(x*x + y*y); };
     void   Rotate(double deg);
 
+    operator sf::Vector2f() { return sf::Vector2f(x, y); };
+
     friend Vector operator+(const Vector& a, const Vector& b);
     friend Vector operator-(const Vector& a);
     friend Vector operator-(const Vector& a, const Vector& b);
