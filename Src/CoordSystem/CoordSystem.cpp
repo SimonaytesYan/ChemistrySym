@@ -18,16 +18,26 @@ CoordSystem::~CoordSystem()
     unit_y = NAN;
 }
 
+double max(double a, double b)
+{
+    return (a < b) ? b : a;
+}
+
+double min(double a, double b)
+{
+    return (a < b) ? a : b;
+}
+
 void CoordSystem::Draw(Widget* window)
 {
     Vector OX((window->GetSize().GetX()) / this->unit_x, 0);
     Vector OY(0, (window->GetSize().GetY()) / this->unit_y);
 
-    OX.Draw(window, this, -(window->GetSize().GetX() / this->unit_x) / 2, 0);
-    OY.Draw(window, this, 0, -(window->GetSize().GetY() / this->unit_y) / 2);
+    OX.Draw(window, this, -x0 / unit_x, 0);
+    OY.Draw(window, this, 0, -(window->GetSize().GetY() - y0) / unit_y);
 
-    double r_x = unit_x / 30;
-    double r_y = unit_y / 30;
+    double r_x = max(unit_x / 30, min(2, unit_x));
+    double r_y = max(unit_y / 30, min(2, unit_y));
 
     for (double x = x0; x < window->GetSize().GetX(); x += unit_x)
     {
