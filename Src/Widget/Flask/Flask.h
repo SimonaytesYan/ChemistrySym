@@ -25,6 +25,8 @@ public :
     void Draw(sf::RenderWindow* window) override;
     
     double CalcTemp();
+    int    CalcSquares();
+    int    CalcCircles();
     void   ChangeTemp(double delta);
     void   ChangePistonHeight(double delta);
 

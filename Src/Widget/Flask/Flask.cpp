@@ -72,6 +72,26 @@ void Flask::Draw(sf::RenderWindow* window)
     }
 }
 
+int Flask::CalcSquares()
+{
+    int result = 0;
+    for (int i = 0; i < particles.GetLength(); i++)
+        if (particles[i]->GetType() == SQUARE)
+            result++;
+    
+    return result;
+}
+
+int Flask::CalcCircles()
+{
+    int result = 0;
+    for (int i = 0; i < particles.GetLength(); i++)
+        if (particles[i]->GetType() == CIRCLE)
+            result++;
+    
+    return result;
+}
+
 //E = 3/2 * k * T
 
 double Flask::CalcTemp()
