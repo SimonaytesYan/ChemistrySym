@@ -1,3 +1,5 @@
+#include <string.h>
+
 #include "Plot.h"
 
 const int kMaxTextLength = 50;
@@ -65,7 +67,8 @@ void Plot::DrawPlotUnits()
     sprintf(string, ox_string);
 	text_i.setString(string);
     text_i.setCharacterSize(15);
-    text_i.setPosition(GetSize().GetX() - coord_sys.GetUnitX() * 3 / 4, coord_sys.GetY0());
+    text_i.setPosition(GetSize().GetX() - text_i.getCharacterSize() * 0.5 * strlen(string), 
+                       coord_sys.GetY0() - text_i.getCharacterSize() * 1.5);
     DrawInside(text_i);
 
     double y_i = plot_unit.GetY();
@@ -79,7 +82,7 @@ void Plot::DrawPlotUnits()
 
         sprintf(string, "%.0lf", y_i);
 	    text_i.setString(string);
-        text_i.setCharacterSize(20);
+        text_i.setCharacterSize(15);
         text_i.setPosition(coord_sys.GetX0(), y);
 
         DrawInside(text_i);
@@ -88,7 +91,7 @@ void Plot::DrawPlotUnits()
     sprintf(string, oy_string);
 	text_i.setString(string);
     text_i.setCharacterSize(15);
-    text_i.setPosition(0, 0);
+    text_i.setPosition(coord_sys.GetX0() + 5, GetSize().GetY() - coord_sys.GetY0() + 5);
     DrawInside(text_i);
 }
 

@@ -15,29 +15,31 @@ const int  kMaxTextLength  = 50;
 
 void CreateButtons(ButtonManager* button_man, sf::Texture textures[6])
 {
-	button_man->AddButton(new Button(100,  525, 100, 50,  AddCircleParticle,   0, sf::Color::Cyan, textures[0]));
+	button_man->AddButton(new Button(100, 525, 100, 50,  AddCircleParticle,   0, sf::Color::Cyan, textures[0]));
 	button_man->AddButton(new Button(225, 525, 100, 50,  AddSquareParticle,   0, sf::Color::Cyan, textures[1]));
 	button_man->AddButton(new Button(350, 525, 100, 50,  IncreaseTemperature, 0, sf::Color::Cyan, textures[2]));
 	button_man->AddButton(new Button(475, 525, 100, 50,  DecreaseTemperature, 0, sf::Color::Cyan, textures[3]));
-	button_man->AddButton(new Button(25, 25, 50,  100, DropPistole,         5, sf::Color::Cyan, textures[4]));
-	button_man->AddButton(new Button(25, 150, 50,  100, RaisePistole,        5, sf::Color::Cyan, textures[5]));
+	button_man->AddButton(new Button(25,  100,  50,  100, DropPistole,         0, sf::Color::Cyan, textures[4]));
+	button_man->AddButton(new Button(25,  300, 50,  100, RaisePistole,        0, sf::Color::Cyan, textures[5]));
 }
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(kWindowSize, kWindowSize), 
                             kWindowHeader);
-	sf::Texture circle, square, temp_up, temp_down;
+	sf::Texture circle, square, temp_up, temp_down, pistol_up, pistol_down;
 
 	circle.loadFromFile("Resources/circle.png");
 	square.loadFromFile("Resources/square.png");
 	temp_up.loadFromFile("Resources/hot.png");
 	temp_down.loadFromFile("Resources/cold.png");
+	pistol_up.loadFromFile("Resources/up.png");
+	pistol_down.loadFromFile("Resources/down.png");
 
 	Widget background(0, 0, window.getSize().x, window.getSize().y, 0);
 	
 	sf::Texture textures[6] = {circle, square, temp_up, temp_down, 
-							  sf::Texture(), sf::Texture()};
+							  pistol_up, pistol_down};
 
 	ButtonManager button_man;
 	CreateButtons(&button_man, textures);
@@ -48,19 +50,19 @@ int main()
 	font.loadFromFile("Resources/Font.ttf");
 
 	Plot temp_plot(650, 0, 300, 300, 
-				           50,  250, 
+				           5,   295, 
 				           50,  50, 
-				    Vector(5,   50), font, "Time (s)", "Temp (K)",
+				    Vector(5,   40), font, "Time (s)", "Temp (K)",
 				    sf::Color(255, 128, 0));
 	
 	Plot square_plot(650, 325, 300, 300,
-							   50, 250,
+							   5,   295,
 				               50,  50, 
 				    	Vector(5,   50), font, "Time (s)", "Squares",
 				    sf::Color(128, 255, 0));
 
 	Plot circle_plot(650, 650, 300, 300,
-							   50, 250,
+							   5,   295,
 				               50,  50, 
 				    	Vector(5,   50), font, "Time (s)", "Circles",
 				    sf::Color(255, 0, 50));
