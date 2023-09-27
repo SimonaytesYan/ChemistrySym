@@ -16,7 +16,7 @@ public :
         array    = (T*)calloc(length, sizeof(T));
     };
 
-    double GetLength() { return length; };
+    int GetLength() { return length; };
 
     T& operator[](int index)
     { return array[index]; };
