@@ -40,7 +40,7 @@ void Flask::Draw(sf::RenderWindow* window)
     }
 
     sf::RectangleShape piston(sf::Vector2f(GetSize().GetX(), GetBorderThick()));
-    piston.setPosition(sf::Vector2f(GetX(), GetY() + piston_height));
+    piston.setPosition(sf::Vector2f(0, piston_height));
     piston.setFillColor(sf::Color::Blue);
 
     DrawInside(piston);
